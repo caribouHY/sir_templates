@@ -1,6 +1,6 @@
 Value Required VLAN_ID (\d+)
 Value VLAN_NAME (\S+)
-Value List INTERFACES ([\w\-]+\s+\d+(\s+\d+)?)
+Value List INTERFACES ([\w-]+\s+\d+(\s+\d+)?)
 
 Start
   ^VID\s+Interface\s+Tag\s+Type\s+Description
