@@ -32,7 +32,7 @@ def convert_yaml(template_path, raw_path, output_path=None, console=False):
         print(f"generated: {output_path}")
 
 
-def generation_yaml_form_file(path: str, write: bool = True):
+def generate_yaml_from_file(path: str, write: bool = True):
     input_path = Path(path)
     output_path = input_path.with_suffix(".yml").as_posix()
     command = input_path.parent.name
@@ -45,7 +45,7 @@ def generation_yaml_form_file(path: str, write: bool = True):
         convert_yaml(template_path, path, None, True)
 
 
-def generation_yaml_form_dir(path: str, write: bool = True):
+def generate_yaml_from_dir(path: str, write: bool = True):
     input_path = Path(path)
     command = input_path.name
     vendor = input_path.parent.name
@@ -63,9 +63,9 @@ def generation_yaml_form_dir(path: str, write: bool = True):
 def generation_yaml(path: str, write: bool = True):
     input_path = Path(path)
     if input_path.is_file():
-        generation_yaml_form_file(path, write)
+        generate_yaml_from_file(path, write)
     else:
-        generation_yaml_form_dir(path, write)
+        generate_yaml_from_dir(path, write)
 
 
 def main():
@@ -78,14 +78,14 @@ def main():
         if len(args) == 3:
             generation_yaml(args[2])
         else:
-            print("invailed paramater")
+            print("invalid parameter")
     elif args[1] == "conv":
         if len(args) == 3:
             generation_yaml(args[2], False)
         else:
             print("invailed paramater")
     else:
-        print("invailed subcommand")
+        print("invalid subcommand")
 
 
 if __name__ == "__main__":
