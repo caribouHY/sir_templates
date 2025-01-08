@@ -1,12 +1,13 @@
-import sys
+import argparse
 from pathlib import Path
+
 
 import textfsm
 import yaml
 
 
 def read_text(path: str) -> str:
-    with open(path) as f:
+    with open(path, "r", encoding="utf-8") as f:
         return f.read()
 
 
@@ -22,17 +23,19 @@ def write_yaml(path: str, parsed_list: list):
         yaml.safe_dump({"parsed_sample": parsed_list}, f)
 
 
-def convert_yaml(template_path, raw_path, output_path=None, console=False):
+def convert_yaml(
+    template_path: str, raw_path: str, output_path: str = None, console: bool = False
+) -> None:
     result = parse_text(template_path, read_text(raw_path))
     if console:
-        print(raw_path)
-        print(yaml.dump(result))
+        print(f"Reading {raw_path}")
+        print(yaml.dump(result, default_flow_style=False))
     if output_path is not None:
         write_yaml(output_path, result)
-        print(f"generated: {output_path}")
+        print(f"Generated: {output_path}")
 
 
-def generate_yaml_from_file(path: str, write: bool = True):
+def generate_yaml_from_file(path: str, write: bool = True) -> None:
     input_path = Path(path)
     output_path = input_path.with_suffix(".yml").as_posix()
     command = input_path.parent.name
@@ -45,7 +48,7 @@ def generate_yaml_from_file(path: str, write: bool = True):
         convert_yaml(template_path, path, None, True)
 
 
-def generate_yaml_from_dir(path: str, write: bool = True):
+def generate_yaml_from_dir(path: str, write: bool = True) -> None:
     input_path = Path(path)
     command = input_path.name
     vendor = input_path.parent.name
@@ -69,23 +72,23 @@ def generation_yaml(path: str, write: bool = True):
 
 
 def main():
-    args = sys.argv
-    if len(args) < 2:
-        print("subcommand")
-        return
+    parser = argparse.ArgumentParser()
+    subparsers = parser.add_subparsers(dest="subcommand")
 
-    if args[1] == "gen":
-        if len(args) == 3:
-            generation_yaml(args[2])
-        else:
-            print("invalid parameter")
-    elif args[1] == "conv":
-        if len(args) == 3:
-            generation_yaml(args[2], False)
-        else:
-            print("invailed paramater")
-    else:
-        print("invalid subcommand")
+    gen_parser = subparsers.add_parser("gen", help="Generate yaml from file/directory")
+    gen_parser.add_argument("path", type=str)
+
+    conv_parser = subparsers.add_parser(
+        "conv", help="Convert raw data to yaml (in console)"
+    )
+    conv_parser.add_argument("path", type=str)
+
+    args = parser.parse_args()
+
+    if args.subcommand == "gen":
+        generation_yaml(args.path, True)
+    elif args.subcommand == "conv":
+        generation_yaml(args.path, False)
 
 
 if __name__ == "__main__":
