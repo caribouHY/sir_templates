@@ -1,10 +1,10 @@
 Value VERSION (\d+\.\d+)
 Value SERIAL (\d+)
-Value SYSTEM (.+)
+Value SYSTEM (.+?)
 Value FIRMWARE (\S+)
 Value CONFIG_FILE (\S+)
-Value STARTUP_TIME (.+)
-Value CURRENT_TIME (.+)
+Value STARTUP_TIME (.+?)
+Value CURRENT_TIME (.+?)
 Value FIRMWARE1_VERSION (\d+\.\d+)
 Value FIRMWARE2_VERSION (\d+\.\d+)
 
@@ -25,3 +25,5 @@ Start
   ^Memory\s+:\s+.+$$
   ^USB\d?\s+:\s+.+$$
   ^WWAN\d?\s+.+$$
+  ^\s*$$
+  ^. -> Error
