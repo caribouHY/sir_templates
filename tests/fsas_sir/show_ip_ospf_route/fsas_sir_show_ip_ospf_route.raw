@@ -1,0 +1,19 @@
+
+Type          Destination/Masklen Nexthop               Cost Area            Interface
+Network Intra 1.1.1.1/32          192.168.50.231           2 0.0.0.0         lan1
+Network Inter 2.2.2.2/32          192.168.50.231          12 0.0.0.0         lan1
+Network Intra 4.4.4.4/32          192.168.50.234           2 0.0.0.0         lan1
+Network Intra 10.3.3.0/28         172.21.120.2             2 0.0.0.3         rmt1
+Network Intra 10.3.120.1/32       0.0.0.0                  1 0.0.0.0         lo0
+Network Intra 10.4.1.0/24         192.168.50.231         201 0.0.0.0         lan1
+Network Intra 10.4.1.0/24         192.168.50.234         201 0.0.0.0         lan1
+Network Inter 172.16.1.0/28       192.168.50.231          11 0.0.0.0         lan1
+Network Intra 172.21.120.0/30     172.21.120.2          1001 0.0.0.3         rmt1
+Network Intra 172.21.120.2/32     0.0.0.0                  1 0.0.0.3         rmt1
+Network Intra 192.168.50.0/24     0.0.0.0                  1 0.0.0.0         lan1
+Router  Intra 1.1.1.1             192.168.50.231           1 0.0.0.0         lan1
+Router  Inter 2.2.2.2             192.168.50.231          11 0.0.0.0         lan1
+Network Type2 10.1.12.0/24        192.168.50.231          20                 lan1
+Network Type2 10.1.13.0/29        192.168.50.231          20                 lan1
+Network Type1 10.2.100.0/24       192.168.50.231          31 0.0.0.0         lan1
+11 Network entries, and 2 Router entries.
